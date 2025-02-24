@@ -19,10 +19,7 @@ export default class CreateAccountContractComponent extends LightningElement {
             this.contractClauses = data.map(clause =>({
                 Id: clause.Id,
                 Name: clause.Name
-            }));
-            if(data.length > 0){   
-                this.billingCountry = data[0].Billing_Country__c;
-            }  
+            })); 
         } else if(error){
             console.error('Error fetching clauses:', error);
         }
