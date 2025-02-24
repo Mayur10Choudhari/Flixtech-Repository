@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Send_Email_to_Account_Owner</name>
+        <label>Send Email to Account Owner</label>
+        <locationX>176</locationX>
+        <locationY>323</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <elementReference>$Record.Owner.Email</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <stringValue>Account Status Updated</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>AccountStatusChange</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>sendRichBody</name>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>logEmailOnSend</name>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>bccRecipientAddressList</name>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+    </actionCalls>
+    <apiVersion>63.0</apiVersion>
+    <description>This Record-Triggered Flow sends an email notification to the Account Owner whenever the Status field (Status__c) on an Account record changes. 
+The email informs the owner of the updated status and prompts them to take necessary actions.</description>
+    <environments>Default</environments>
+    <interviewLabel>Account Status Change Notification {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Account Status Change Notification</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Send_Email_to_Account_Owner</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Status__c</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <object>Account</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <description>This test is used to send an email to the Account owner when the status changes.</description>
+        <name>AccountStatusChange</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;&lt;strong style=&quot;background-color: rgb(255, 255, 255); font-size: small; font-family: Arial, Helvetica, sans-serif; color: rgb(34, 34, 34);&quot;&gt;Hello&lt;/strong&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); font-size: small; font-family: Arial, Helvetica, sans-serif; color: rgb(34, 34, 34);&quot;&gt;,&amp;nbsp;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;The status&amp;nbsp;of&amp;nbsp;your account &lt;strong&gt;&quot;{!$Record.Name}&quot;&lt;/strong&gt; has been updated&amp;nbsp;to&amp;nbsp;&lt;strong&gt;{!$Record.Status__c}&lt;/strong&gt;.&amp;nbsp;&lt;/p&gt;&lt;p&gt;Please review the changes&amp;nbsp;as&amp;nbsp;necessary.&amp;nbsp;&lt;/p&gt;&lt;p&gt;Regards,&amp;nbsp;&lt;/p&gt;&lt;p&gt;Salesforce&lt;/p&gt;</text>
+    </textTemplates>
+</Flow>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+<types>
+<members>*</members>
+<name>ApexClass</name>
+</types>
+<types>
+<members>Account_Contract__c</members> <!-- This retrieves a custom object -->
+<members>Account_Contract_Clause__c</members>
+<name>CustomObject</name>
+</types>
+<types>
+<members>Account.Status__c</members> <!-- Retrieves the Name field on Account -->
+<name>CustomField</name>
+</types>
+<types>
+<members>*</members>
+<name>PathAssistant</name>
+</types>
+<types>
+<!-- Quick Action definition, replace with the correct API name -->
+<members>*</members> <!-- API Name of Quick Action -->
+<name>QuickAction</name> <!-- Metadata type for Quick Actions -->
+</types>
+<types>
+<members>Account_Contract_Editor</members>
+<members>Account_Contract_Viewer</members>
+<name>PermissionSet</name>
+</types>
+<types>
+<members>Account_Status_Change_Notification</members>
+<name>Flow</name>
+</types>
+<types>
+<members>Account_Record_Page</members> <!-- FlexiPage name -->
+<name>FlexiPage</name> <!-- Metadata type -->
+</types>
+<types>
+<members>*</members> <!-- This includes all Lightning Web Components in the project -->
+<name>LightningComponentBundle</name>
+</types>
+<version>60.0</version>
+</Package>
